@@ -1,0 +1,116 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SimShield - Telecom Carrier Authentication and SIM Swap Radar API",
+    "version": "1.0.0",
+    "description": "Enterprise CAMARA-compliant Silent Network Authentication (SNA) and Anti-SIM Swap Fraud Prevention Microservice."
+  },
+  "servers": [
+    {
+      "url": "https://simshield-api.onrender.com"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health and CAMARA Spec Status",
+        "responses": {
+          "200": {
+            "description": "System healthy"
+          }
+        }
+      }
+    },
+    "/v1/verify-number": {
+      "post": {
+        "summary": "Silent Network Direct Number Verification",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "phone_number": {
+                    "type": "string",
+                    "example": "+14155552671"
+                  }
+                },
+                "required": [
+                  "phone_number"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Carrier verification result"
+          }
+        }
+      }
+    },
+    "/v1/sim-swap-risk": {
+      "post": {
+        "summary": "SIM Swap Fraud and Temporal Analysis",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "phone_number": {
+                    "type": "string",
+                    "example": "+14155552671"
+                  },
+                  "max_age_hours": {
+                    "type": "integer",
+                    "example": 72
+                  }
+                },
+                "required": [
+                  "phone_number"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SIM swap risk score"
+          }
+        }
+      }
+    },
+    "/v1/line-intelligence": {
+      "post": {
+        "summary": "Carrier Lookup and VoIP Fraud Detection",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "phone_number": {
+                    "type": "string",
+                    "example": "+14155552671"
+                  }
+                },
+                "required": [
+                  "phone_number"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Line intelligence and risk score"
+          }
+        }
+      }
+    }
+  }
+}
